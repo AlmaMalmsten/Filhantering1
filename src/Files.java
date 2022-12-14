@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,12 +9,12 @@ public class Files {
     Scanner scanner = new Scanner(System.in);
     public Files(){
 
-
     }
 
-    ArrayList<String> persons = new ArrayList<>(); //creating Arraylist used later in methods
 
-    //read from file chosen by user
+    ArrayList<String> persons = new ArrayList<>(); //creating Arraylist used later in methods
+    File myFile = new File("myFile.txt");
+    //read from file
     void writeFile() {
         //if user wants to overwrite file
         String overWrite = "";
@@ -28,13 +30,14 @@ public class Files {
                 writing = scanner.nextLine();
             }
             catch (Exception e){
-
+                System.out.println("no");
             }
 
         if (overWrite == "Y") {
             try {
                 FileWriter myWriter = new FileWriter("myFile.txt");
                 myWriter.write(writing);
+                myWriter.close();
             }
             catch (IOException e){
                 System.out.println("NO");
@@ -45,36 +48,56 @@ public class Files {
             try {
                 FileWriter myWriter = new FileWriter("myFile.txt", true);
                 myWriter.write(writing);
+                myWriter.close();
             }
             catch (IOException e){
                 System.out.println("NO");
             }
         }
     }
+
     //write to file
     void readFile(){
+        try {
+            Scanner myReader = new Scanner(myFile);
 
+            while (myReader.hasNextLine()) {
+                String data =
+                        myReader.nextLine();
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+                    e.printStackTrace();
+        }
     }
+
     //save persons in persons Arraylist in file
     void namePerson(){
 
     }
+
     //take in persons from file and sort in persons arraylist
     void sortPerson(){
 
     }
+
     //is posseble to write read from file?
     void posseble(){
 
     }
+
     //find the longest word in file
     void findLongest(){
 
     }
+
     //find most common word
     void comWord(){
 
     }
+
     //list all files in map
     void allFiles(){
 
