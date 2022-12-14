@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,25 +13,46 @@ public class Files {
     ArrayList<String> persons = new ArrayList<>(); //creating Arraylist used later in methods
 
     //read from file chosen by user
-    void readFile() {
+    void writeFile() {
         //if user wants to overwrite file
         String overWrite = "";
+        String writing = "";
             try {
                 System.out.println("Want to over write?");
                 overWrite = scanner.nextLine();
             } catch (Exception e) {
                 System.out.println("Y or N pls");
             }
-        if (overWrite == "Y") {
+            try {
+                System.out.println("What do yoou wanna write? ");
+                writing = scanner.nextLine();
+            }
+            catch (Exception e){
 
+            }
+
+        if (overWrite == "Y") {
+            try {
+                FileWriter myWriter = new FileWriter("myFile.txt");
+                myWriter.write(writing);
+            }
+            catch (IOException e){
+                System.out.println("NO");
+            }
         }
         //add to end of file
         else {
-
+            try {
+                FileWriter myWriter = new FileWriter("myFile.txt", true);
+                myWriter.write(writing);
+            }
+            catch (IOException e){
+                System.out.println("NO");
+            }
         }
     }
     //write to file
-    void writeFile(){
+    void readFile(){
 
     }
     //save persons in persons Arraylist in file
