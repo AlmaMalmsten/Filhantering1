@@ -11,7 +11,6 @@ public class Files {
 
     }
 
-
     ArrayList<String> persons = new ArrayList<>(); //creating Arraylist used later in methods
     File myFile = new File("myFile.txt");
     //read from file
@@ -75,7 +74,17 @@ public class Files {
 
     //save persons in persons Arraylist in file
     void namePerson(){
-
+        for (String person:persons) {
+            try {
+                FileWriter myWriter = new FileWriter("persons.txt");
+                myWriter.write(person + "/n");
+                        myWriter.close();
+            } catch (IOException e) {
+                System.out.println("Could not write to file");
+                        e.printStackTrace();
+            }
+        }
+        System.out.println("Successfully wrote to the file.");
     }
 
     //take in persons from file and sort in persons arraylist
