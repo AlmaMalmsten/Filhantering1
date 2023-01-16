@@ -3,15 +3,18 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Files {
     Scanner scanner = new Scanner(System.in);
     public Files(){
-
+        writeFile();
+        readFile();
+        namePerson();
     }
 
-    ArrayList<String> persons = new ArrayList<>(); //creating Arraylist used later in methods
+    ArrayList<String> persons = new ArrayList<String>(); //creating Arraylist used later in methods
     File myFile = new File("myFile.txt");
     //read from file
     void writeFile() {
@@ -32,7 +35,7 @@ public class Files {
                 System.out.println("no");
             }
 
-        if (overWrite == "Y") {
+        if (Objects.equals(overWrite, "Y")) {
             try {
                 FileWriter myWriter = new FileWriter("myFile.txt");
                 myWriter.write(writing);
@@ -92,14 +95,27 @@ public class Files {
 
     }
 
-    //is posseble to write read from file?
-    void posseble(){
-
-    }
-
     //find the longest word in file
-    void findLongest(){
+    String findLongest() {
+        String longestWord = "";
+        String current;
+        try {
+            Scanner sc = new Scanner("words.txt");
 
+            //while scaner still can, compare current med longest yet.
+            while (sc.hasNext()) {
+                current = sc.next();
+                if (current.length() > longestWord.length()) {
+                    longestWord = current;
+                }
+
+            }
+            System.out.println("\n"+longestWord+"\n");
+            }
+        catch (Exception e){
+            System.out.println("No");
+        }
+        return longestWord;
     }
 
     //find most common word
@@ -109,6 +125,5 @@ public class Files {
 
     //list all files in map
     void allFiles(){
-
     }
 }
